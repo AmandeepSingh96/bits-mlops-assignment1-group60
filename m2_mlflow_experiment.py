@@ -1,12 +1,17 @@
 import mlflow
 import mlflow.sklearn
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.datasets import load_diabetes
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-# Load dataset
-X, y = load_diabetes(return_X_y=True)
+# Load the dataset from CSV (Assuming dataset is saved as 'data/diabetes.csv')
+df = pd.read_csv('data/diabetes.csv')
+
+# Split dataset into features and target
+X = df.drop(columns=['target']).values
+y = df['target'].values
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # List of different hyperparameter settings for different runs

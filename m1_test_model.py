@@ -1,5 +1,5 @@
-# test_model.py
-from model import train_model
+# m1_test_model.py
+from m1_linear_regression_model import train_model
 
 
 def test_train_model():
