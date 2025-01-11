@@ -4,7 +4,7 @@ from sklearn.linear_model import LinearRegression
 
 
 def train_model():
-    # Load the dataset from CSV (Assuming dataset is saved as 'data/diabetes.csv')
+    # Load the dataset from CSV
     df = pd.read_csv('data/diabetes.csv')
 
     # Split dataset into features and target
