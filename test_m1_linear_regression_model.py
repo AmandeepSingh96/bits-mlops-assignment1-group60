@@ -1,4 +1,4 @@
-# m1_test_model.py
+# test_m1_linear_regression_model.py
 from m1_linear_regression_model import train_model
 
 
