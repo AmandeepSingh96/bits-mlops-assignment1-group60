@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/m1-cicd-pipeline
+      - master
   pull_request:
     branches:
       - master
