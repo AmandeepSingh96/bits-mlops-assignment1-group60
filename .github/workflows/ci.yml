@@ -39,8 +39,8 @@ jobs:
     - name: Push DVC data
       run: dvc push
 
-    - name: Pull dataset using DVC
-      run: dvc pull
+#    - name: Pull dataset using DVC
+#      run: dvc pull
 
     - name: Lint with flake8
       run: |
