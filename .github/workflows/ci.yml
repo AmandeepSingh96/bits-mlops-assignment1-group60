@@ -36,8 +36,18 @@ jobs:
     - name: Configure DVC remote
       run: dvc remote add -d temp_remote ./tmp/dvc-storage
 
+    - name: List DVC cache directory
+      run: |
+          echo "Listing contents of .dvc/cache directory:"
+          ls .dvc/cache  # List the contents of the DVC cache directory
+
     - name: Push DVC data
       run: dvc push
+
+    - name: List DVC cache directory
+      run: |
+        echo "Listing contents of .dvc/cache directory:"
+        ls .dvc/cache  # List the contents of the DVC cache directory
 
 #    - name: Pull dataset using DVC
 #      run: dvc pull
