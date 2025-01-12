@@ -5,12 +5,8 @@ import dvc.api
 
 
 def train_model():
-    # Fetch dataset path from DVC
-    dataset_url = dvc.api.get_url('data/diabetes-dataset.csv')
-    print(dataset_url)
-
-    # Load the dataset from CSV using the fetched URL
-    df = pd.read_csv(dataset_url)
+    # Load the dataset from CSV
+    df = pd.read_csv('data/diabetes-dataset.csv')
 
     # Split dataset into features and target
     X = df.drop(columns=['target']).values

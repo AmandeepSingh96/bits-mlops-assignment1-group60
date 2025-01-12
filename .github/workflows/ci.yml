@@ -25,32 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest scikit-learn pandas dvc
-
-    - name: Initialize DVC repo
-      run: dvc init
-
-    - name: Set up temporary storage
-      run: mkdir -p ./tmp/dvc-storage
-
-    - name: Configure DVC remote
-      run: dvc remote add -d temp_remote ./tmp/dvc-storage
-
-    - name: List DVC cache directory
-      run: |
-          echo "Listing contents of .dvc/cache directory:"
-          ls .dvc/cache  # List the contents of the DVC cache directory
-
-    - name: Push DVC data
-      run: dvc push
-
-    - name: List DVC cache directory
-      run: |
-        echo "Listing contents of .dvc/cache directory:"
-        ls .dvc/cache  # List the contents of the DVC cache directory
-
-#    - name: Pull dataset using DVC
-#      run: dvc pull
+        pip install flake8 pytest scikit-learn pandas
 
     - name: Lint with flake8
       run: |
