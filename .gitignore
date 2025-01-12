@@ -24,6 +24,9 @@ Thumbs.db
 # Data Version Control (DVC) cache
 .dvc/
 
+# Ignore DVC remote storage for local
+tmp/
+
 # Python wheel files
 *.whl
 

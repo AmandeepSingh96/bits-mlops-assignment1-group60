@@ -1,11 +1,16 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+import dvc.api
 
 
 def train_model():
-    # Load the dataset from CSV
-    df = pd.read_csv('data/diabetes-dataset.csv')
+    # Fetch dataset path from DVC
+    dataset_url = dvc.api.get_url('data/diabetes-dataset.csv')
+    print(dataset_url)
+
+    # Load the dataset from CSV using the fetched URL
+    df = pd.read_csv(dataset_url)
 
     # Split dataset into features and target
     X = df.drop(columns=['target']).values
