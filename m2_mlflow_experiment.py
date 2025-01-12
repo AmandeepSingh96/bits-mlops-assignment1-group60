@@ -5,7 +5,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-# Load the dataset from CSV (Assuming dataset is saved as 'data/diabetes-dataset.csv')
+# Load the dataset from CSV
+# (Assuming dataset is saved as 'data/diabetes-dataset.csv')
 df = pd.read_csv('data/diabetes-dataset.csv')
 
 # Split dataset into features and target
