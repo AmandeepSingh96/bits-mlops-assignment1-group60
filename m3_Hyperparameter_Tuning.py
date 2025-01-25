@@ -1,4 +1,3 @@
-import pickle
 import json
 import optuna
 import pandas as pd
@@ -65,5 +64,8 @@ with open('best_hyperparameters.json', 'w') as f:
 # Train and Save the Final Model with Best Hyperparameters
 final_model = RandomForestRegressor(**best_params, random_state=42)
 final_model.fit(X_train, y_train)
+
+accuracy = final_model.score(X_test, y_test)
+print(f"Model accuracy: {accuracy:.4f}")
 
 print("Model training completed.")
