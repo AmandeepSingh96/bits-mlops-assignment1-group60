@@ -1,38 +1,36 @@
 import joblib
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 
-# Load the trained model using joblib
-model_path = "model.pkl"
-try:
-    model = joblib.load(model_path)
-    print("Model loaded successfully.")
-except Exception as e:
-    model = None
-    print(f"Error loading model: {e}")
+# Load the trained model and scaler
+model = joblib.load('model/model.pkl')
+scaler = joblib.load('model/scaler.pkl')
 
+# Create Flask app
 app = Flask(__name__)
-CORS(app)
 
 @app.route('/')
 def home():
-    return "Welcome to the ML API! Use /predict to get predictions."
+    return "Welcome to the Diabetes Prediction API! Use the /predict endpoint to make predictions."
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    if model is None:
-        return jsonify({"error": "Model not loaded"}), 500
-
-    data = request.get_json()
-    if not data or 'features' not in data:
-        return jsonify({"error": "No features provided"}), 400
-
     try:
+        # Check if the request has JSON content
+        if not request.is_json:
+            return jsonify({'error': 'Request content must be JSON'}), 400
+
+        # Parse the JSON payload
+        data = request.get_json()
         features = data['features']
-        prediction = model.predict([features])
-        return jsonify({"prediction": prediction.tolist()})
+
+        # Process the input
+        features_scaled = scaler.transform([features])
+        prediction = model.predict(features_scaled)
+
+        return jsonify({'prediction': prediction.tolist()})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({'error': str(e)}), 400
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5001)
