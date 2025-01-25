@@ -1,12 +1,12 @@
-import pickle
+import joblib
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-# Load the trained model
-model_path = "model_1.pkl"
+# Load the trained model using joblib
+model_path = "model.pkl"
 try:
-    with open(model_path, "rb") as f:
-        model = pickle.load(f)
+    model = joblib.load(model_path)
+    print("Model loaded successfully.")
 except Exception as e:
     model = None
     print(f"Error loading model: {e}")
