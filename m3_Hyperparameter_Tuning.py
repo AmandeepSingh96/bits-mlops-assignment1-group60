@@ -66,7 +66,4 @@ with open('best_hyperparameters.json', 'w') as f:
 final_model = RandomForestRegressor(**best_params, random_state=42)
 final_model.fit(X_train, y_train)
 
-# Save the trained model
-joblib.dump(final_model, 'model.pkl')
-
-print("Model training and saving completed.")
+print("Model training completed.")
