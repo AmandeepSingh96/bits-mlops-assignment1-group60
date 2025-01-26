@@ -12,7 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      DVC_GDRIVE_CREDENTIALS=/service-account-key.json
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -40,6 +41,12 @@ jobs:
     - name: DVC INIT
       run: |
         dvc init
+    - name: Reset auth method
+      run: |
+        dvc remote modify mlops-dataset --local --unset auth
+    - name: DVC credentials modify
+      run: |
+        dvc remote modify mlops-dataset gdrive_credentials_file ./service-account-key.json
     - name: Set DVC remote
       run: |
           dvc remote add -d mlops-dataset gdrive://1z2-YIszgPRvkdtSjBSqbU6BACfzSYrgn
