@@ -18,7 +18,12 @@ X = df.drop(columns=['target']).values
 y = df['target'].values
 
 # Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
+)
 
 # Feature scaling
 scaler = StandardScaler()
@@ -48,7 +53,13 @@ def objective(trial):
     )
 
     # Perform cross-validation
-    mse_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='neg_mean_squared_error')
+    mse_scores = cross_val_score(
+        model,
+        X_train,
+        y_train,
+        cv=5,
+        scoring='neg_mean_squared_error'
+    )
     return -mse_scores.mean()
 
 
@@ -75,4 +86,3 @@ print("Model training completed.")
 
 # Save the model
 joblib.dump(final_model, 'model/model.pkl')
-

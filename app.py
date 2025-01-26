@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Welcome to the Diabetes Prediction API! Use the /predict endpoint to make predictions."
+    return "Welcome to the Diabetes Prediction API!"
 
 
 @app.route('/predict', methods=['POST'])
