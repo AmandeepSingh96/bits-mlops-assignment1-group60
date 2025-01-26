@@ -12,8 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DVC_GDRIVE_CREDENTIALS=/service-account-key.json
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
