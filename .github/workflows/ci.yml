@@ -52,19 +52,6 @@ jobs:
       run: |
         export DVC_GDRIVE_CREDENTIALS=./service-account-key.json
 
-    - name: Remove old dataset cache
-      run: |
-        dvc remove data/diabetes-dataset.csv.dvc
-
-    - name: Re-add dataset to DVC
-      run: |
-        dvc add data/diabetes-dataset.csv
-
-    - name: Commit changes to Git
-      run: |
-        git add data/diabetes-dataset.csv.dvc dvc.lock
-        git commit -m "Update dataset MD5 in cache"
-
     - name: Set DVC remote with service account authentication
       run: |
         dvc remote modify mlops-dataset gdrive_use_service_account true
@@ -89,6 +76,23 @@ jobs:
     - name: Pull DVC data from Google Drive
       run: |
         dvc pull -v
+
+    - name: Pull DVC data from Google Drive
+      run: |
+        dvc pull data/diabetes-dataset.csv
+
+    - name: Remove old dataset cache
+      run: |
+        dvc remove data/diabetes-dataset.csv.dvc
+
+    - name: Re-add dataset to DVC
+      run: |
+        dvc add data/diabetes-dataset.csv
+
+    - name: Commit changes to Git
+      run: |
+        git add data/diabetes-dataset.csv.dvc dvc.lock
+        git commit -m "Update dataset MD5 in cache"
 
     - name: Clean up service account key
       run: |
