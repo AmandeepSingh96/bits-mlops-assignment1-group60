@@ -22,8 +22,7 @@ env/
 Thumbs.db
 
 # Data Version Control (DVC) cache
-.dvc/cache
-.dvc/tmp
+.dvc
 
 # Python wheel files
 *.whl
