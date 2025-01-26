@@ -37,6 +37,9 @@ jobs:
       run: |
           echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}" > service-account-key.json
           export DVC_GDRIVE_CREDENTIALS=service-account-key.json
+    - name: Set DVC remote
+      run: |
+          dvc remote add -d mlops-dataset gdrive://1z2-YIszgPRvkdtSjBSqbU6BACfzSYrgn
     - name: Pull DVC data from Google Drive
       run: dvc pull
     - name: Run tests
