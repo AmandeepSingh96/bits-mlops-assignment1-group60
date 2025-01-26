@@ -45,9 +45,6 @@ jobs:
     - name: Reset auth method
       run: |
         dvc remote modify mlops-dataset --local --unset auth
-    - name: DVC credentials modify
-      run: |
-        dvc remote modify mlops-dataset gdrive_credentials_file ./service-account-key.json
     - name: Pull DVC data from Google Drive
       run: dvc pull
     - name: Run tests
