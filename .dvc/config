@@ -1,3 +1,0 @@
-['remote "mlops-dataset"']
-    url = gdrive://1z2-YIszgPRvkdtSjBSqbU6BACfzSYrgn
-    gdrive_user_credentials_file = ./service-account-key.json
