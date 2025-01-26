@@ -8,9 +8,11 @@ scaler = joblib.load('model/scaler.pkl')
 # Create Flask app
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
     return "Welcome to the Diabetes Prediction API! Use the /predict endpoint to make predictions."
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
