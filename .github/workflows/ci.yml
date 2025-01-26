@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DVC_GDRIVE_CREDENTIALS: /service-account-key.json
+      DVC_GDRIVE_CREDENTIALS: service-account-key.json
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -46,9 +46,19 @@ jobs:
         rm -rf .dvc/config
         rm -rf .dvc/.cache
 
+    - name: Remove existing DVC remote
+      run: |
+        dvc remote remove mlops-dataset
+
     - name: Set DVC remote
       run: |
         dvc remote add -d mlops-dataset gdrive://1z2-YIszgPRvkdtSjBSqbU6BACfzSYrgn
+
+    - name: Set DVC remote with service account authentication
+      run: |
+        dvc remote modify mlops-dataset gdrive_use_service_account true
+        dvc remote modify mlops-dataset gdrive_service_account_json_path ./service-account-key.json
+
 
     - name: Check DVC remote list
       run: |
