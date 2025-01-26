@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DVC_GDRIVE_CREDENTIALS: service-account-key.json
+      DVC_GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -59,6 +59,12 @@ jobs:
     - name: Check DVC remote list
       run: |
         dvc remote list
+
+    - name: Verify service account key
+      run: cat service-account-key.json
+
+    - name: Verify DVC_GDRIVE_CREDENTIALS variable
+      run: echo $DVC_GDRIVE_CREDENTIALS
 
     - name: Pull DVC data from Google Drive
       run: |
