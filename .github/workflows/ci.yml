@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DVC_GDRIVE_CREDENTIALS: service-account-key.json
+      DVC_GDRIVE_CREDENTIALS: /service-account-key.json
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -53,10 +53,6 @@ jobs:
     - name: Check DVC remote list
       run: |
         dvc remote list
-
-    - name: Reset auth method
-      run: |
-        dvc config --global remote.mlops-dataset.auth ""
 
     - name: Pull DVC data from Google Drive
       run: |
