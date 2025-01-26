@@ -66,6 +66,11 @@ jobs:
     - name: Verify DVC_GDRIVE_CREDENTIALS variable
       run: echo $DVC_GDRIVE_CREDENTIALS
 
+    - name: Check service account key file size
+      run: |
+        ls -lh service-account-key.json
+        wc -l service-account-key.json
+
     - name: Pull DVC data from Google Drive
       run: |
         dvc pull -v
