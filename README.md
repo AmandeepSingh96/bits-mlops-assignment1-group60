@@ -30,3 +30,29 @@ Body:
 {
     "features": [90.0, 1.0, 1.0, 23.0, 94.0, 1.1, 0.167, 1.0, 2.0, 9.0]
 }
+
+M4: Model Deployment & Orchestration (Optional)
+
+// Create cluster using command
+// Cluster name - mlops-group60
+eksctl create cluster --name mlops-group60 --region us-east-1 --version 1.27 --nodegroup-name  standard-workers --node-type t3.medium --nodes 2 --nodes-min 1 --nodes-max 3 –managed
+
+
+
+
+The Kubernetes configuration files and Helm chart used for deployment can be found under the helm folder
+
+
+// Deployment command:
+helm.exe upgrade --install diabetest-prediction-app ./helm
+
+
+
+// Deployment verification
+
+
+//External IP
+a58c9c25fa0b441e29edcb288a11c0c0-555215127.us-east-1.elb.amazonaws.com
+
+
+
