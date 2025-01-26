@@ -46,10 +46,6 @@ jobs:
         rm -rf .dvc/config
         rm -rf .dvc/.cache
 
-    - name: Remove existing DVC remote
-      run: |
-        dvc remote remove mlops-dataset
-
     - name: Set DVC remote
       run: |
         dvc remote add -d mlops-dataset gdrive://1z2-YIszgPRvkdtSjBSqbU6BACfzSYrgn
