@@ -48,6 +48,10 @@ jobs:
       run: |
         dvc remote add -d mlops-dataset gdrive://1z2-YIszgPRvkdtSjBSqbU6BACfzSYrgn
 
+    - name: Export env variable
+      run: |
+        export DVC_GDRIVE_CREDENTIALS=./service-account-key.json
+
     - name: Set DVC remote with service account authentication
       run: |
         dvc remote modify mlops-dataset gdrive_use_service_account true
