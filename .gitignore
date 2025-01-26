@@ -22,7 +22,8 @@ env/
 Thumbs.db
 
 # Data Version Control (DVC) cache
-.dvc/
+.dvc/cache
+.dvc/tmp
 
 # Python wheel files
 *.whl
@@ -37,3 +38,4 @@ Thumbs.db
 mlruns/
 
 /data/diabetes-dataset.csv
+/diabetes-dataset.csv
