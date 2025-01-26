@@ -33,3 +33,7 @@ Thumbs.db
 # pytest
 .cache/
 *.log
+
+mlruns/
+
+/data/diabetes-dataset.csv
