@@ -29,8 +29,6 @@ jobs:
         pip install flake8 pytest scikit-learn pandas
         pip install "dvc[gdrive]"
 
-    
-
     - name: Lint with flake8
       run: |
         flake8 .
@@ -38,11 +36,6 @@ jobs:
     - name: DVC INIT
       run: |
         dvc init
-
-    - name: Clear dvc config cache
-      run: |
-        rm -rf .dvc/config
-        rm -rf .dvc/.cache
 
     - name: Set DVC remote
       run: |
@@ -76,23 +69,6 @@ jobs:
     - name: Pull DVC data from Google Drive
       run: |
         dvc pull -v
-
-    - name: Pull DVC data from Google Drive
-      run: |
-        dvc pull data/diabetes-dataset.csv
-
-    - name: Remove old dataset cache
-      run: |
-        dvc remove data/diabetes-dataset.csv.dvc
-
-    - name: Re-add dataset to DVC
-      run: |
-        dvc add data/diabetes-dataset.csv
-
-    - name: Commit changes to Git
-      run: |
-        git add data/diabetes-dataset.csv.dvc dvc.lock
-        git commit -m "Update dataset MD5 in cache"
 
     - name: Clean up service account key
       run: |
