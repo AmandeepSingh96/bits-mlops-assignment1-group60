@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DVC_GDRIVE_CREDENTIALS: service-account-key.json
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -25,28 +27,35 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest scikit-learn pandas
+        pip install "dvc[gdrive]"
+
+    - name: Configure Google Drive credentials
+      run: |
+          echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}" > service-account-key.json
 
     - name: Lint with flake8
       run: |
         flake8 .
-    - name: Install DVC with Google Drive support
-      run: |
-          pip install "dvc[gdrive]"
-    - name: Configure Google Drive credentials
-      run: |
-          echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}" > service-account-key.json
-          export DVC_GDRIVE_CREDENTIALS=service-account-key.json
+
     - name: DVC INIT
       run: |
         dvc init
+
     - name: Set DVC remote
       run: |
         dvc remote add -d mlops-dataset gdrive://1z2-YIszgPRvkdtSjBSqbU6BACfzSYrgn
+
     - name: Reset auth method
       run: |
-        dvc remote modify mlops-dataset --local --unset auth
+        dvc remote modify mlops-dataset --global --unset auth
+
     - name: Pull DVC data from Google Drive
-      run: dvc pull
+      run: |
+        dvc pull -v
+
+    - name: Clean up service account key
+      run: |
+        rm -f service-account-key.json
     - name: Run tests
       run: |
         pytest
