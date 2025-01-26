@@ -37,3 +37,4 @@ Thumbs.db
 mlruns/
 
 /data/diabetes-dataset.csv
+/diabetes-dataset.csv
