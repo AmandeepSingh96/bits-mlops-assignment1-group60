@@ -41,13 +41,22 @@ jobs:
       run: |
         dvc init
 
+    - name: Clear dvc config cache
+      run: |
+        rm -rf .dvc/config
+        rm -rf .dvc/.cache
+
     - name: Set DVC remote
       run: |
         dvc remote add -d mlops-dataset gdrive://1z2-YIszgPRvkdtSjBSqbU6BACfzSYrgn
 
+    - name: Check DVC remote list
+      run: |
+        dvc remote list
+
     - name: Reset auth method
       run: |
-        dvc remote modify mlops-dataset --global --unset auth
+        dvc config --global remote.mlops-dataset.auth ""
 
     - name: Pull DVC data from Google Drive
       run: |
@@ -56,6 +65,7 @@ jobs:
     - name: Clean up service account key
       run: |
         rm -f service-account-key.json
+
     - name: Run tests
       run: |
         pytest
