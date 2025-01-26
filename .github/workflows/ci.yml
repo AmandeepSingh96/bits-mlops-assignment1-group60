@@ -34,3 +34,12 @@ jobs:
     - name: Run tests
       run: |
         pytest
+    - name: Install DVC with Google Drive support
+        run: |
+          pip install "dvc[gdrive]"
+    - name: Configure Google Drive credentials
+            run: |
+              echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}" > service-account-key.json
+              export DVC_GDRIVE_CREDENTIALS=service-account-key.json
+    - name: Pull DVC data from Google Drive
+            run: dvc pull
