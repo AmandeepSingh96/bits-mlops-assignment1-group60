@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: amandeepsingh96/diabetes-prediction-app
+  pullPolicy: IfNotPresent
+  tag: latest
+
+service:
+  type: LoadBalancer
+  port: 80
+
+resources:
+  limits:
+    memory: 256Mi
+    cpu: 500m
+  requests:
+    memory: 128Mi
+    cpu: 250m
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
