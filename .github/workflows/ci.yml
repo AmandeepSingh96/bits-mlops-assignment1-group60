@@ -43,8 +43,7 @@ jobs:
 
     - name: Export env variable
       run: |
-        echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}" > service-account-key.json
-        export DVC_GDRIVE_CREDENTIALS=service-account-key.json
+        echo "${DVC_GDRIVE_CREDENTIALS}" > service-account-key.json
 
     - name: Verify service account key
       run: cat service-account-key.json
@@ -60,7 +59,7 @@ jobs:
     - name: Set DVC remote with service account authentication
       run: |
         dvc remote modify mlops-dataset gdrive_use_service_account true
-        dvc remote modify mlops-dataset gdrive_service_account_json_file_path ./service-account-key.json
+        dvc remote modify mlops-dataset gdrive_service_account_json_file_path service-account-key.json
         dvc remote modify mlops-dataset gdrive_service_account_user_email dvc-service-account@flash-hour-449016-j7.iam.gserviceaccount.com
 
     - name: Check DVC remote list
